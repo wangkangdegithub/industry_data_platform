@@ -27,13 +27,10 @@ def register(request):
 def tables(request):
     return render(request, 'tables.html')
 
-
-
 def upload(request):
     if request.method == 'GET':
         return render(request,'upload.html')
     elif request.method == 'POST':
-
         # 请求api的结果
         url = 'http://restapi.amap.com/v3/ip?key=b55e49c33bd3a93081481980973aefab&'
         x = requests.get(url)
@@ -65,7 +62,7 @@ def result(request):
     counts = request.GET.get('ids')
     int_counts = int(counts)
     c = []
-    content = models.NewTable.objects.all().values('RenamePath').order_by('-id')[:int_counts]
+    content = models.NewTable.objects.all().values('RenamePath').order_by('-id')[:int_counts]  # 从数据库取数据
     for i in content:
         c.append(i['RenamePath'])
     # y = 'F:/untitled/media/pexpy.155.jpg'
@@ -82,4 +79,13 @@ def result(request):
         index += 1
     return render(request,'result.html',context)
 
-
+def test(request):
+    if request.method == 'POST':
+        pictures = models.NewTable.objects.all().order_by('-id')[10:12]
+        return render(request, 'test.html', {'pictures': pictures})
+    if request.method == 'GET':
+        result = request.GET.get('malfunction', '无故障')  # 此值可看作是 每张照片里的故障特征描述
+                                                            # 选择结果存到数据库中
+        pictures = models.NewTable.objects.all().order_by('-id')[10:12]
+        test = 'CNM'
+        return render(request, 'test.html', {'result': result, 'pictures': pictures, 'test': test})

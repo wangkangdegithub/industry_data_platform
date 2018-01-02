@@ -17,7 +17,7 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from djangoapp.views import upload
 from djangoapp.views import result
-from djangoapp.views import homepage,index,charts,tables,navbar,cards,blank,forgotpassword,login
+from djangoapp.views import homepage,index,charts,tables,navbar,cards,blank,forgotpassword,login,test
 import xadmin
 
 urlpatterns = [
@@ -35,4 +35,5 @@ urlpatterns = [
     url(r'^dashboard/login', login),
     url(r'^upload/', upload),
     url(r'^result/', result),
+    url(r'^test/',test)
 ]

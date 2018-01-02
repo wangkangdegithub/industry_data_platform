@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script>
+        function displayResult(malfunction){
+            <!-- getElementById() 方法可返回对拥有指定 ID 的第一个对象的引用。 -->
+            document.getElementById("result").value=malfunction
+        }
+    </script>
+
+    <script>
+        var a=["http://img2.imgtn.bdimg.com/it/u=75485669,2964556719&fm=27&gp=0.jpg","http://img5.imgtn.bdimg.com/it/u=1605768505,1635112978&fm=27&gp=0.jpg","http://img1.imgtn.bdimg.com/it/u=875556644,3958594899&fm=27&gp=0.jpg"];
+        var imgNum=0;
+        window.onload=function(){
+            var path=a[0];
+            document.getElementById("image").src=path;
+        };
+        function nextImage(){
+            imgNum++;
+            var imgpath=a[imgNum];
+             document.getElementById("image").src=imgpath;
+        }
+    </script>
+
+    <script>
+        var b=["http://img5.imgtn.bdimg.com/it/u=3695773423,3489797324&fm=27&gp=0.jpg","http://img0.imgtn.bdimg.com/it/u=2520370494,2851223326&fm=27&gp=0.jpg","http://img.zcool.cn/community/01711b59426ca1a8012193a31e5398.gif"];
+        var malfunctionNum=0;
+        window.onload=function(){
+            var malfunctionpath=b[0];
+            document.getElementById("malfunction").src=malfunctionpath;
+        };
+        function nextMalfunction(){
+            malfunctionNum++;
+            var malfunctionpath=b[malfunctionNum];
+             document.getElementById("malfunction").src=malfunctionpath;
+        }
+    </script>
+</head>
+
+<body>
+<p>来自另一个文件夹的图像：</p>
+<form action="/test/" method="get">
+    <button onclick="nextImage()">下一张EL</button>
+</form>
+<img ID="image" width="720" height="550">
+
+<p>选择故障类型:</p>
+<form action="/test/" method="GET">
+    <input type="submit" value="下一个故障" onclick="nextMalfunction()" ><br>
+    <input type="radio" name="malfunction" onclick="displayResult(this.value)" value="黑斑">黑斑<br>
+    <input type="radio" name="malfunction" onclick="displayResult(this.value)" value="实心大黑点">实心大黑点<br>
+    <input type="radio" name="malfunction" onclick="displayResult(this.value)" value="线痕划伤">线痕划伤<br>
+    <input type="radio" name="malfunction" onclick="displayResult(this.value)" value="舟尺印">舟尺印<br>
+    <input type="radio" name="malfunction" onclick="displayResult(this.value)" value="手指印">手指印<br>
+    <input type="hidden" id="result" >
+</form>
+<img ID="malfunction"  width="720" height="550">
+<p>测试：{{ result }}</p>
+
+
+
+</body>
+</html>
