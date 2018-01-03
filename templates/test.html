@@ -5,62 +5,82 @@
     <meta charset="UTF-8">
     <title>test</title>
     <script>
+        // 显示故障类型的选择结果
         function displayResult(malfunction){
             <!-- getElementById() 方法可返回对拥有指定 ID 的第一个对象的引用。 -->
             document.getElementById("result").value=malfunction
         }
-    </script>
 
-    <script>
         var a=["http://img2.imgtn.bdimg.com/it/u=75485669,2964556719&fm=27&gp=0.jpg","http://img5.imgtn.bdimg.com/it/u=1605768505,1635112978&fm=27&gp=0.jpg","http://img1.imgtn.bdimg.com/it/u=875556644,3958594899&fm=27&gp=0.jpg"];
         var imgNum=0;
+        var b=["http://img5.imgtn.bdimg.com/it/u=3695773423,3489797324&fm=27&gp=0.jpg","http://img0.imgtn.bdimg.com/it/u=2520370494,2851223326&fm=27&gp=0.jpg","http://img.zcool.cn/community/01711b59426ca1a8012193a31e5398.gif"];
+        var malfunctionNum=0;
+        // 预加载图像 初始化为预加载第一张el图像和第一张故障图像
         window.onload=function(){
             var path=a[0];
             document.getElementById("image").src=path;
-        };
+
+            var malfunctionpath=b[0];
+            document.getElementById("malfunction").src=malfunctionpath;
+        }
+
+        // 下一张el图像
         function nextImage(){
             imgNum++;
             var imgpath=a[imgNum];
              document.getElementById("image").src=imgpath;
         }
-    </script>
 
-    <script>
-        var b=["http://img5.imgtn.bdimg.com/it/u=3695773423,3489797324&fm=27&gp=0.jpg","http://img0.imgtn.bdimg.com/it/u=2520370494,2851223326&fm=27&gp=0.jpg","http://img.zcool.cn/community/01711b59426ca1a8012193a31e5398.gif"];
-        var malfunctionNum=0;
-        window.onload=function(){
-            var malfunctionpath=b[0];
-            document.getElementById("malfunction").src=malfunctionpath;
-        };
+        // 上一张el图像
+        function lastImage(){
+            imgNum--;
+            var imgpath=a[imgNum];
+             document.getElementById("image").src=imgpath;
+        }
+
+        // 下一张故障图像
         function nextMalfunction(){
             malfunctionNum++;
             var malfunctionpath=b[malfunctionNum];
              document.getElementById("malfunction").src=malfunctionpath;
         }
+
+        // 上一张故障图像
+        function lastMalfunction(){
+            malfunctionNum--;
+            var malfunctionpath=b[malfunctionNum];
+             document.getElementById("malfunction").src=malfunctionpath;
+        }
     </script>
+
 </head>
 
 <body>
 <p>来自另一个文件夹的图像：</p>
-<form action="/test/" method="get">
-    <button onclick="nextImage()">下一张EL</button>
-</form>
 <img ID="image" width="720" height="550">
+<br>
+<button onclick="lastImage()">上一张EL</button>
+<button onclick="nextImage()">下一张EL</button>
+<br>
+<br>
+<img ID="malfunction"  width="720" height="550">
 
 <p>选择故障类型:</p>
-<form action="/test/" method="GET">
-    <input type="submit" value="下一个故障" onclick="nextMalfunction()" ><br>
+<form action="/test/" method="GET" target="ds">
     <input type="radio" name="malfunction" onclick="displayResult(this.value)" value="黑斑">黑斑<br>
     <input type="radio" name="malfunction" onclick="displayResult(this.value)" value="实心大黑点">实心大黑点<br>
     <input type="radio" name="malfunction" onclick="displayResult(this.value)" value="线痕划伤">线痕划伤<br>
     <input type="radio" name="malfunction" onclick="displayResult(this.value)" value="舟尺印">舟尺印<br>
     <input type="radio" name="malfunction" onclick="displayResult(this.value)" value="手指印">手指印<br>
-    <input type="hidden" id="result" >
+    <!-- submit两种写法，一种是提交后不连接onclick事件，onclick由后一个按钮触发；另一种是提交的同时触发onclick事件，自动进入下一张故障图片-->
+    <!-- input type="submit" -->
+    <input type="submit" onclick="nextMalfunction()">
 </form>
-<img ID="malfunction"  width="720" height="550">
-<p>测试：{{ result }}</p>
+<!-- 增加iframe的作用是为了防止form表单提交时刷新页面。 -->
+<iframe name="ds" style="display: none;"> </iframe>
 
-
+<button  onclick="lastMalfunction()" >上一个故障</button>
+<button  onclick="nextMalfunction()" >下一个故障</button>
 
 </body>
 </html>

@@ -20,5 +20,9 @@ class NewTable(models.Model):
     Tag = models.CharField(max_length=30)
     RenamePath = models.CharField(max_length=30)
 
+class Test(models.Model):
+    test_char = models.CharField(max_length=30)
+    test_number = models.IntegerField()
+
     def __str__(self):  # 在Python3中用 __str__ 代替 __unicode__
         return self.Path

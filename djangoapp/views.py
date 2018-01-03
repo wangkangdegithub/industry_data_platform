@@ -84,8 +84,9 @@ def test(request):
         pictures = models.NewTable.objects.all().order_by('-id')[10:12]
         return render(request, 'test.html', {'pictures': pictures})
     if request.method == 'GET':
-        result = request.GET.get('malfunction', '无故障')  # 此值可看作是 每张照片里的故障特征描述
-                                                            # 选择结果存到数据库中
+        result = request.GET.get('malfunction','')      # 此值可看作是 每张照片里的故障特征描述  初始值为空，在这里，由于采用预加载图片的形式，所以test.html一刷新就会有初始值传递到数据库中。
+
+        # 测试数据库
+        models.Test.objects.create(test_char=result,test_number = 5)   # 选择结果存到数据库中
         pictures = models.NewTable.objects.all().order_by('-id')[10:12]
-        test = 'CNM'
-        return render(request, 'test.html', {'result': result, 'pictures': pictures, 'test': test})
+        return render(request, 'test.html', {'result': result, 'pictures': pictures})
