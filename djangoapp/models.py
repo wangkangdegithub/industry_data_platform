@@ -14,12 +14,14 @@ class Table(models.Model):
     Path = models.CharField(max_length=30)
     Tag = models.CharField(max_length=30)
 
+# 包含重命名后的图片路径字段
 class NewTable(models.Model):
     Datetime = models.DateTimeField()
     Path = models.CharField(max_length=30)
     Tag = models.CharField(max_length=30)
     RenamePath = models.CharField(max_length=30)
 
+# 测试用的数据库，用来测试form表单提交的故障类结果
 class Test(models.Model):
     test_char = models.CharField(max_length=30)
     test_number = models.IntegerField()
