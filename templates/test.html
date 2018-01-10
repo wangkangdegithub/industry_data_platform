@@ -13,10 +13,11 @@
         }
 
         // 把一个 list 或 dict等 JSON对象 传到网页的 javascript，用 JS 进行处理，比如用 js 将数据可视化显示到网页上。
-        var a = {{ el_images|safe}}
+        var a = {{ all_el_images|safe}}
         //var a=["http://img5.imgtn.bdimg.com/it/u=1605768505,1635112978&fm=27&gp=0.jpg","http://img1.imgtn.bdimg.com/it/u=875556644,3958594899&fm=27&gp=0.jpg"];
         var imgNum = 0;
-        var b = ["http://img5.imgtn.bdimg.com/it/u=3695773423,3489797324&fm=27&gp=0.jpg","http://img0.imgtn.bdimg.com/it/u=2520370494,2851223326&fm=27&gp=0.jpg","http://img.zcool.cn/community/01711b59426ca1a8012193a31e5398.gif"];
+        //var b = ["http://img5.imgtn.bdimg.com/it/u=3695773423,3489797324&fm=27&gp=0.jpg","http://img0.imgtn.bdimg.com/it/u=2520370494,2851223326&fm=27&gp=0.jpg","http://img.zcool.cn/community/01711b59426ca1a8012193a31e5398.gif"];
+        var b = {{ el_images|safe}}
         var malfunctionNum = 0;
         // 预加载图像 初始化为预加载第一张el图像和第一张故障图像
         window.onload = function(){
@@ -25,7 +26,7 @@
             document.getElementById("image").src = "/media/" + path;
 
             var malfunctionpath = b[0];
-            document.getElementById("malfunction").src = malfunctionpath;
+            document.getElementById("malfunction").src = "/media/" + malfunctionpath;
         }
 
         // 下一张el图像
@@ -46,14 +47,14 @@
         function nextMalfunction(){
             malfunctionNum ++;
             var malfunctionpath = b[malfunctionNum];
-             document.getElementById("malfunction").src = malfunctionpath;
+             document.getElementById("malfunction").src = "/media/" + malfunctionpath;
         }
 
         // 上一张故障图像
         function lastMalfunction(){
             malfunctionNum --;
             var malfunctionpath = b[malfunctionNum];
-             document.getElementById("malfunction").src = malfunctionpath;
+             document.getElementById("malfunction").src = "/media/" + malfunctionpath;
         }
 
     </script>
@@ -62,7 +63,7 @@
         p1.po_1
         {
             position:absolute;
-            top:50px;
+            top:60px;
             left:700px;
         }
         p2.po_2
@@ -76,7 +77,7 @@
 </head>
 
 <body>
-<p>来自另一个文件夹的图像：</p>
+<h3>EL打标签平台</h3>
 <div id = "image1">
     <img ID="image" width="600" height="450" alt="暂无图片！">
 </div>
@@ -94,30 +95,30 @@
 <p>选择故障类型:</p>
 <form action="/test/" method="GET" target="ds">
     <input type="radio" name="malfunction" onclick="displayResult(this.value)" value="黑斑">黑斑
-    <input type="radio" name="malfunction" onclick="displayResult(this.value)" value="实心大黑点">实心大黑点<
+    <input type="radio" name="malfunction" onclick="displayResult(this.value)" value="实心大黑点">实心大黑点
     <input type="radio" name="malfunction" onclick="displayResult(this.value)" value="舟尺印">舟尺印
     <input type="radio" name="malfunction" onclick="displayResult(this.value)" value="手指印">手指印
-	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="el断栅">el断栅<br>
-	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="高方阻">高方阻
+	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="el断栅">el断栅
+	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="高方阻">高方阻<br>
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="过刻">过刻
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="药液残留">药液残留
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="背膜异常">背膜异常
-	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="ct卡点发黑">ct卡点发黑<br>
+	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="ct卡点发黑">ct卡点发黑
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="ct边角发黑">ct边角发黑
-	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="ct气流片">ct气流片
+	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="ct气流片">ct气流片<br>
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="整体偏暗">整体偏暗
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="全黑">全黑
-	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="雾状发黑">雾状发黑<br>
+	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="雾状发黑">雾状发黑
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="无规律麻点">无规律麻点
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="皮带麻点">皮带麻点
-	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="隐裂">隐裂
+	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="隐裂">隐裂<br>
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="三四角发黑">三四角发黑
-	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="激光">激光<br>
+	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="激光">激光
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="背极印宽">背极印宽
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="线痕划伤">线痕划伤
     <input type="radio" name="malfunction" onclick="displayResult(this.value)" value="扩散吸盘印">扩散吸盘印
-	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="顶齿划伤">顶齿划伤
-	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="花篮印">花篮印<br>
+	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="顶齿划伤">顶齿划伤<br>
+	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="花篮印">花篮印
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="横向线痕划伤">横向线痕划伤
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="无规律曲线划伤">无规律曲线划伤
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="pe吸盘印">pe吸盘印
@@ -127,21 +128,20 @@
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="短小划伤">短小划伤
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="滚轮印">滚轮印
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="皮带印">皮带印
-	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="横向划伤">横向划伤<br>
-	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="其他划伤">其他划伤
+	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="横向划伤">横向划伤
+	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="其他划伤">其他划伤<br>
 	<input type="radio" name="malfunction" onclick="displayResult(this.value)" value="其他">其他
+
     <!-- submit两种写法，一种是提交后不连接onclick事件，onclick由后一个按钮触发；另一种是提交的同时触发onclick事件，自动进入下一张故障图片-->
     <!-- input type="submit" -->
     <br>
-    <input type="submit" onclick="nextMalfunction()">
+    <br>
+    <button  onclick="lastMalfunction();lastImage()" >上一个故障</button>
+    <button  onclick="nextMalfunction();nextImage()" >下一个故障</button>
 </form>
-
+<input type="hidden" id="result" >
 <!-- 增加iframe的作用是为了防止form表单提交时刷新页面。 -->
 <iframe name="ds" style="display: none;"> </iframe>
-<br>
-<button  onclick="lastMalfunction()" >上一个故障</button>
-<button  onclick="nextMalfunction()" >下一个故障</button>
 </p2>
-
 </body>
 </html>

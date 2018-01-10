@@ -19,6 +19,8 @@ from djangoapp.views import upload
 from djangoapp.views import result
 from djangoapp.views import homepage,index,charts,tables,navbar,cards,blank,forgotpassword,login,test
 import xadmin
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     #url(r'^admin/', admin.site.urls),
@@ -35,5 +37,5 @@ urlpatterns = [
     url(r'^dashboard/login', login),
     url(r'^upload/', upload),
     url(r'^result/', result),
-    url(r'^test/',test)
-]
+    url(r'^test/',test),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
