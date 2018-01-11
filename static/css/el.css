@@ -1,0 +1,45 @@
+#header {
+	background-color: #333366;
+	height: 50px;
+	font-size: 22px;
+	font-weight: bold;
+	padding: 10px 5px 10px 20px;
+	color: white;
+}
+
+#header a {
+	color: white;
+}
+
+#header a:hover {
+	color: blue;
+	text-decoration: none;
+}
+
+#body {
+	background-color: #FCFCFC;
+	font-size: 15px;
+	padding: 8px 8px 8px 20px;
+}
+
+#body-left{
+	width: 49.5%;
+	height: 600px;
+	float: left;
+}
+
+#body-right{
+	width: 49.5%;
+	height: 600px;
+	float: right;
+}
+
+#right-top{
+	width: 100%;
+	height: 450px;
+}
+
+#right-bottom{
+	width: 100%;
+	height: 150px;
+}
