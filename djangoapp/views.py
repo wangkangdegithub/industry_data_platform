@@ -86,16 +86,16 @@ def test(request):
         return render(request, 'test.html', {'pictures': pictures})
     if request.method == 'GET':
         result = request.GET.get('malfunction','None')      # 此值可看作是 每张照片里的故障特征描述  初始值为空，在这里，由于采用预加载图片的形式，所以test.html一刷新就会有初始值传递到数据库中。
+        # 字段7
+        models.TestELtype.objects.create(el_type=result)    # 选择结果存到数据库中
+        pictures = models.TestELimg.objects.all().order_by('id')
 
-        # 👇测试数据库
-        models.Test.objects.create(test_char=result,test_number = 5)   # 选择结果存到数据库中
-        pictures = models.NewTable.objects.all().order_by('-id')
-        el_images = []
-        all_el_images = []
+        dytzqt_el_images = []
+        tzqt_el_images = []
         for i in pictures:
-            el_images.append(i.RenamePath)
-            all_el_images.append(i.Path)
+            dytzqt_el_images.append(i.dytzqt_el_path)
+            tzqt_el_images.append(i.tzqt_el_path)
         # 1.视图函数中的字典或列表要用 json.dumps()处理(序列化处理)。2.在模板上要加 safe 过滤器。
-        return render(request, 'test.html', {'result': result, 'el_images': json.dumps(el_images),'all_el_images':json.dumps(all_el_images)})
+        return render(request, 'test.html', {'result': result, 'dytzqt_el_images': json.dumps(dytzqt_el_images),'tzqt_el_images':json.dumps(tzqt_el_images)})
 
 

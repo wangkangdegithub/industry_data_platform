@@ -28,10 +28,9 @@
 				<div class="col-sm-6">
 				  <div class="main-pic">
 				  	<div class="row pic">
-			      		<img ID="image" class="img-fluid img-thumbnail" alt="Responsive image">
+			      		<img id="malfunction" class="img-fluid img-thumbnail" alt="故障细节">
 			      	</div>
 				  </div>
-				  
 			      <!--button group-->
 			      <div class="row" style="text-align: center; margin-top: 10px;">
 			      	<div class="col-sm-6">
@@ -53,7 +52,7 @@
 								<div class="silder-scroll">
 									<div class="silder-main">
                                         <div class="silder-main-img">
-                                            <img ID="malfunction"  alt="细节图!" width="200" height="250">
+                                            <img id="image"  alt="EL故障特征全图!" width="200" height="250">
 										</div>
 									</div>
 								</div>
@@ -243,7 +242,10 @@
 			    						<input type="radio"  name="malfunction" onclick="displayResult(this.value)" value="无规律曲线划伤">
 										<label>无规律曲线划伤</label>
 			    					</td>
-                                    <td></td>
+                                    <td>
+                                        <input type="radio"  name="malfunction" onclick="displayResult(this.value)" value="无故障">
+                                        <label>无故障</label>
+                                    </td>
                                     <td></td>
                                     <td>
                                         <button  class="btn btn-sm btn-primary" onclick="lastMalfunction();lastImage()" >上一个故障</button>
@@ -297,9 +299,9 @@
             }
 
             // 把一个 list 或 dict等 JSON对象 传到网页的 javascript，用 JS 进行处理，比如用 js 将数据可视化显示到网页上。
-            var a= {{ all_el_images|safe }}
+            var a= {{ tzqt_el_images|safe }}
             var imgNum = 0;
-            var b = {{ el_images|safe}}
+            var b = {{ dytzqt_el_images|safe}}
             var malfunctionNum = 0;
             // 预加载图像 初始化为预加载第一张el图像和第一张故障图像
             window.onload = function(){
@@ -313,13 +315,13 @@
             function nextImage(){
                 imgNum ++;
                 var imgpath = a[imgNum];
-                 document.getElementById("image").src = "/media/" + imgpath;
+                document.getElementById("image").src = "/media/" + imgpath;
             }
             // 上一张el图像
             function lastImage(){
                 imgNum --;
                 var imgpath = a[imgNum];
-                 document.getElementById("image").src = "/media/" + imgpath;
+                document.getElementById("image").src = "/media/" + imgpath;
             }
             // 下一张故障图像
             function nextMalfunction(){
@@ -332,6 +334,15 @@
                 malfunctionNum --;
                 var malfunctionpath = b[malfunctionNum];
                  document.getElementById("malfunction").src = "/media/" + malfunctionpath;
+            }
+            //
+            function testSubmit(){
+                var src = document.getElementById("malfunction").src;
+                var targetArray = [];
+                targetArray.push("/dddd/ddd");
+                $.post(url,{srcPath:src,aa:targetArray},function(data){
+
+                });
             }
     </script>
 	</body>
